@@ -7,6 +7,9 @@ int mutex_init(mutex_t* mutex) {
 }
 
 int mutex_lock(mutex_t* mutex) {
+	int tries = 100;
+	while (mutex->lock && tries--);
+
 	while (mutex->lock || a_cas(&mutex->lock, 0, 1)) {
 		futex((unsigned int*) (&mutex->lock), FUTEX_WAIT, 1, NULL, NULL, 0);
 	};

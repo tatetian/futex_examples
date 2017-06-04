@@ -2,7 +2,7 @@
 
 C_SRCS := $(sort $(wildcard *.c))
 C_OBJS := $(C_SRCS:.c=.o)
-COMMON_OBJS := mutex.o futex.o
+COMMON_OBJS := mutex.o futex.o condvar.o
 TEST_SRCS := $(sort $(wildcard test_*.c))
 BINS := $(TEST_SRCS:.c=)
 
