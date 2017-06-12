@@ -6,14 +6,14 @@
 #define NTHREADS	5
 
 void* wait(void* data) {
-	unsigned int* val = (unsigned int*) data;
+	int* val = (int*) data;
 	futex(val, FUTEX_WAIT, 1, NULL, NULL, 0);
 	return NULL;
 }
 
 int main() {
 	pthread_t sleeping_threads[NTHREADS];
-	unsigned int val = 1;
+	int val = 1;
 	for (int ti = 0; ti < NTHREADS; ti++) {
 		pthread_create(&sleeping_threads[ti], NULL, wait, &val);
 	}

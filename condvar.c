@@ -18,7 +18,7 @@ int condvar_wait(condvar_t* condvar, mutex_t* mutex) {
 	int curr_futex = condvar->futex;
 	mutex_unlock(mutex);
 
-	futex((unsigned int*) (&condvar->futex), FUTEX_WAIT, curr_futex, NULL, NULL, 0);
+	futex((int*) (&condvar->futex), FUTEX_WAIT, curr_futex, NULL, NULL, 0);
 	mutex_lock(mutex);
 	return 0;
 }
@@ -29,6 +29,6 @@ int condvar_wait(condvar_t* condvar, mutex_t* mutex) {
  * */
 int condvar_signal(condvar_t* condvar) {
 	condvar->futex++;
-	futex((unsigned int*) (&condvar->futex), FUTEX_WAKE, 1, NULL, NULL, 0);
+	futex((int*) (&condvar->futex), FUTEX_WAKE, 1, NULL, NULL, 0);
 	return 0;
 }

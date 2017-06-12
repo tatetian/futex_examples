@@ -15,7 +15,7 @@ static __inline long __syscall6(long n, long a1, long a2, long a3, long a4, long
 }
 
 
-long futex(unsigned int *uaddr, int op, int val,
+long futex(int *uaddr, int op, int val,
 		struct timespec *utime, unsigned int *uaddr2, int val3) {
 	return __syscall6(__NR_futex, (long)uaddr, (long)op, (long)val, (long)utime, (long)uaddr2, (long)val3);
 }
